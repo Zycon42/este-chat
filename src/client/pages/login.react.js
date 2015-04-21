@@ -4,8 +4,9 @@ import {focusInvalidField} from '../../lib/validation';
 import {getForm} from '../auth/store';
 import {msg} from '../intl/store';
 import {updateFormField, login} from '../auth/actions';
+import {Paper, TextField, FlatButton, AppCanvas, AppBar} from 'material-ui';
 
-require('./login.styl');
+require('./login.less');
 
 class Login extends React.Component {
 
@@ -26,44 +27,68 @@ class Login extends React.Component {
     this.props.router.replaceWith(nextPath || '/');
   }
 
+  renderForm(form) {
+    return (
+      <form onSubmit={(e) => this.onFormSubmit(e)}>
+        <fieldset>
+          <TextField
+            className="form-field"
+            floatingLabelText="Email"
+            hintText={msg('auth.form.placeholder.email')}
+            value={form.fields.email}
+            onChange={updateFormField}
+            disabled={login.pending}
+            name="email"
+          />
+          <TextField
+            className="form-field"
+            floatingLabelText="Password"
+            hintText={msg('auth.form.placeholder.password')}
+            disabled={login.pending}
+            name="password"
+            onChange={updateFormField}
+            type="password"
+            value={form.fields.password}
+          />
+          <FlatButton
+            className="btn-login"
+            label={msg('auth.form.button.login')}
+            disabled={login.pending}
+            type="submit"
+            primary={true}
+          />
+          {form.error &&
+            <span className="error-message">{form.error.message}</span>
+          }
+        </fieldset>
+      </form>
+    );
+  }
+
   render() {
     const form = getForm().toJS();
 
     return (
-      <div className="login">
-        <form onSubmit={(e) => this.onFormSubmit(e)}>
-          <fieldset>
-            <legend>{msg('auth.form.legend')}</legend>
-            <input
-              autoFocus="true"
-              disabled={login.pending}
-              name="email"
-              onChange={updateFormField}
-              placeholder={msg('auth.form.placeholder.email')}
-              value={form.fields.email}
-            /><br />
-            <input
-              disabled={login.pending}
-              name="password"
-              onChange={updateFormField}
-              placeholder={msg('auth.form.placeholder.password')}
-              type="password"
-              value={form.fields.password}
-            /><br />
-            <button
-              disabled={login.pending}
-              type="submit"
-            >{msg('auth.form.button.login')}</button>
-            {/*
-            <button type="submit">{msg('auth.form.button.signup')}</button>
-            */}
-            {form.error &&
-              <span className="error-message">{form.error.message}</span>
-            }
-            <div>{msg('auth.form.hint')}</div>
-          </fieldset>
-        </form>
-      </div>
+      <AppCanvas>
+        <AppBar
+          className="app-bar"
+          title={msg('auth.form.legend')}
+          zDepth={0}>
+        </AppBar>
+
+        <div className="container-fluid login-page">
+          <div className="row">
+            <div className="col-xs-12 col-md-offset-3 col-md-6">
+              <Paper className="login">
+                <div className="content">
+                  <img src="assets/img/logo.png" />
+                  {this.renderForm(form)}
+                </div>
+              </Paper>
+            </div>
+          </div>
+        </div>
+      </AppCanvas>
     );
   }
 
