@@ -1,31 +1,26 @@
 /*eslint-disable no-console */
 
 import compression from 'compression';
+import bodyParser from 'body-parser';
 import config from './config';
 import express from 'express';
 // import favicon from 'serve-favicon';
-import render from './render';
+import routes from './routes';
 
 export default function() {
 
   const app = express();
 
   app.use(compression());
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({extended: false}));
   // TODO: Add favicon.
   // app.use(favicon('assets/img/favicon.ico'))
   // TODO: Move to CDN.
   app.use('/build', express.static('build'));
   app.use('/assets', express.static('assets'));
 
-  app.get('*', (req, res) => {
-    const acceptsLanguages = req.acceptsLanguages(config.appLocales);
-    render(req, res, acceptsLanguages || config.defaultLocale)
-      .catch((error) => {
-        const msg = error.stack || error;
-        console.log(msg);
-        res.status(500).send('500: ' + msg);
-      });
-  });
+  routes(app);
 
   app.listen(config.port);
 
