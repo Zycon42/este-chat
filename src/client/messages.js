@@ -4,7 +4,7 @@ export default {
       form: {
         legend: 'Login / Sign Up',
         placeholder: {
-          email: 'your@email.com',
+          username: 'username',
           password: 'password'
         },
         button: {
@@ -28,7 +28,7 @@ export default {
     },
     validation: {
       required: `Please fill out {prop, select,
-        email {email}
+        username {username}
         password {password}
         other {'{prop}'}
       }.`,

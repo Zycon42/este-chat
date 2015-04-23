@@ -4,6 +4,7 @@ import {RouteHandler} from 'react-router';
 import requireAuth from '../auth/requireauth.react';
 import ThreadList from '../chat/threadlist.react';
 import {getThreadsChrono} from '../chat/store';
+import {state} from '../state';
 
 // Leverage webpack require goodness for feature toggle based dead code removal.
 require('./chat.styl');

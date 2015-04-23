@@ -3,6 +3,7 @@ import setToString from '../../lib/settostring';
 import {ValidationError} from '../../lib/validation';
 import {dispatch} from '../dispatcher';
 import {validate} from '../validation';
+import request from 'superagent';
 
 export function updateFormField({target: {name, value}}) {
   // Both email and password max length is 100.
@@ -25,20 +26,21 @@ export function login(fields) {
 
 function validateForm(fields) {
   return validate(fields)
-    .prop('email').required().email()
+    .prop('username').required()
     .prop('password').required().simplePassword()
     .promise;
 }
 
 function validateCredentials(fields) {
-  // Simulate long async action.
   return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (fields.password === 'pass1')
-        resolve();
-      else
-        reject(new ValidationError('Wrong password', 'password'));
-    }, 3000);
+    request
+      .post('/api/auth').send({username: fields.username, password: fields.password})
+      .end((err, res) => {
+        if (!res.ok)
+          reject(new ValidationError('Wrong password', 'password'));
+        else
+          resolve(res.body);
+      });
   });
 }
 

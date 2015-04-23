@@ -8,7 +8,7 @@ export default {
   auth: {
     form: {
       fields: {
-        email: '',
+        username: '',
         password: ''
       },
       error: null

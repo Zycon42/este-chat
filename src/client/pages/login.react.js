@@ -33,12 +33,12 @@ class Login extends React.Component {
         <fieldset>
           <TextField
             className="form-field"
-            floatingLabelText="Email"
-            hintText={msg('auth.form.placeholder.email')}
-            value={form.fields.email}
+            floatingLabelText="Username"
+            hintText={msg('auth.form.placeholder.username')}
+            value={form.fields.username}
             onChange={updateFormField}
             disabled={login.pending}
-            name="email"
+            name="username"
           />
           <TextField
             className="form-field"
