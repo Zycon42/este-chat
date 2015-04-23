@@ -3,7 +3,7 @@ import setToString from '../../lib/settostring';
 import {ValidationError} from '../../lib/validation';
 import {dispatch} from '../dispatcher';
 import {validate} from '../validation';
-import request from 'superagent';
+import {authenticate} from '../api';
 
 export function updateFormField({target: {name, value}}) {
   // Both email and password max length is 100.
@@ -32,15 +32,8 @@ function validateForm(fields) {
 }
 
 function validateCredentials(fields) {
-  return new Promise((resolve, reject) => {
-    request
-      .post('/api/auth').send({username: fields.username, password: fields.password})
-      .end((err, res) => {
-        if (!res.ok)
-          reject(new ValidationError('Wrong password', 'password'));
-        else
-          resolve(res.body);
-      });
+  return authenticate(fields.username, fields.password).catch(e => {
+    throw new ValidationError('Invalid username or password', 'password');
   });
 }
 

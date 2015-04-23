@@ -1,25 +1,22 @@
 import config from '../../config';
 import express from 'express';
+import Promise from 'bluebird';
 import passport from 'passport';
 import {Strategy as LocalStrategy} from 'passport-local';
 import jwt from 'jsonwebtoken';
 import User from '../user/model';
 
 passport.use(new LocalStrategy(
-  function(username, password, done) {
-    let scope = {};
-    User.forge({username}).fetch({require: true}).then(user => {
-      scope.user = user;
-      return user.authenticate(password);
-    }).then(authenticated => {
-      if (!authenticated) {
+  Promise.coroutine(function*(username, password, done) {
+    try {
+      const user = yield User.forge({username}).fetch({require: true});
+      if (!(yield user.authenticate(password)))
         return done(null, false, {message: 'This password is not correct.'});
-      }
-      return done(null, scope.user);
-    }).catch(err => {
-      return done(err);
-    });
-  }
+      return done(null, user);
+    } catch (e) {
+      return done(e);
+    }
+  })
 ));
 
 let router = express.Router();
