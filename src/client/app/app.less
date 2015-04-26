@@ -10,3 +10,37 @@
 body {
   background-color: @grey-100;
 }
+
+.app-bar {
+  position: absolute;
+  height: 128px;
+  z-index: 0;
+}
+
+.page-container {
+  padding-top: 64px;
+
+  .content {
+    z-index: 1;
+    background-color: #fff;
+
+    form {
+      .form-field {
+        width: 100%;
+      }
+
+      button, a {
+        float: right;
+        margin-top: 2rem;
+      }
+
+      .error-message {
+        color: red;
+      }
+    }
+  }
+
+  .content > div {
+    padding: 2rem;
+  }
+}

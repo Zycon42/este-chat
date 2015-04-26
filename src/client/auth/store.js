@@ -1,40 +1,65 @@
 import {authCursor} from '../state';
-import {login, loginError, updateFormField} from './actions';
+import * as actions from './actions';
 import {register} from '../dispatcher';
 
-export function getForm() {
-  return authCursor().get('form');
+export function getLoginForm() {
+  return authCursor().getIn(['forms', 'login']);
+}
+
+export function getSignUpForm() {
+  return authCursor().getIn(['forms', 'signUp']);
 }
 
 export const dispatchToken = register(({action, data}) => {
 
   switch (action) {
-    case login:
+    case actions.login:
       authCursor(auth => {
-        return resetForm(auth);
+        return resetLoginForm(auth);
       });
       break;
 
-    case loginError:
+    case actions.loginError:
       authCursor(auth => {
         const error = data;
-        return auth.setIn(['form', 'error'], error);
+        return auth.setIn(['forms', 'login', 'error'], error);
       });
       break;
 
-    case updateFormField:
+    case actions.updateFormField:
       authCursor(auth => {
-        const {name, value} = data;
-        return auth.setIn(['form', 'fields', name], value);
+        const {form, name, value} = data;
+        return auth.setIn(['forms', form, 'fields', name], value);
+      });
+      break;
+
+    case actions.register:
+      authCursor(auth => {
+        return resetSignUpForm(auth);
+      });
+      break;
+
+    case actions.registerError:
+      authCursor(auth => {
+        const error = data;
+        return auth.setIn(['forms', 'signUp', 'error'], error);
       });
       break;
   }
 
 });
 
-function resetForm(auth) {
+function resetLoginForm(auth) {
   return auth
-    .setIn(['form', 'error'], null)
-    .setIn(['form', 'fields', 'email'], '')
-    .setIn(['form', 'fields', 'password'], '');
+    .setIn(['forms', 'login', 'error'], null)
+    .setIn(['forms', 'login', 'fields', 'username'], '')
+    .setIn(['forms', 'login', 'fields', 'password'], '');
+}
+
+function resetSignUpForm(auth) {
+  return auth
+    .setIn(['forms', 'signUp', 'error'], null)
+    .setIn(['forms', 'signUp', 'fields'], {
+      name: '', email: '', password: '', passwordConfirmation: ''
+    })
 }

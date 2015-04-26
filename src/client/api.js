@@ -21,13 +21,18 @@ function abortPendingRequest(key) {
 }
 
 export function authenticate(username, password) {
-  abortPendingRequest(authenticate.name);
   const req = request.post('/api/auth').send({username, password});
-  _pendingRequests[authenticate.name] = req;
-  return send(req).then(res => res.body);
+  return send(authenticate.name, req).then(res => res.body);
 }
 
-function send(req) {
+export function createUser(name, email, password) {
+  const req = request.post('/api/user').send({name, email, password});
+  return send(createUser.name, req).then(res => res.body);
+}
+
+function send(key, req) {
+  abortPendingRequest(req);
+  _pendingRequests[key] = req;
   return new Promise((resolve, reject) => {
     req.end((err, res) => {
       if (err) {

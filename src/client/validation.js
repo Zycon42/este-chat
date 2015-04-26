@@ -1,5 +1,6 @@
 import Validation from '../lib/validation';
 import {msg} from './intl/store';
+//import bookshelf from '../server/bookshelf';
 
 class AppValidation extends Validation {
 
@@ -14,7 +15,6 @@ class AppValidation extends Validation {
   getSimplePasswordMessage(minLength) {
     return msg('validation.password', {minLength});
   }
-
 }
 
 export function validate(object: Object) {

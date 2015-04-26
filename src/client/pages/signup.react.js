@@ -1,11 +1,9 @@
 import React from 'react';
 import {Paper} from 'material-ui';
-import LoginForm from '../auth/loginform.react';
 import {msg} from '../intl/store';
+import SignUpForm from '../auth/signupform.react';
 
-require('./login.less');
-
-export default class Login extends React.Component {
+export default class SignUp extends React.Component {
 
   render() {
     return (
@@ -13,15 +11,13 @@ export default class Login extends React.Component {
         <div className="row">
           <div className="col-xs-12 col-md-offset-3 col-md-6">
             <Paper className="content">
-              <img src="assets/img/logo.png" />
-              <LoginForm />
+              <SignUpForm />
             </Paper>
           </div>
         </div>
       </div>
     );
   }
-
 }
 
-Login.displayName = msg('page.login.title');
+SignUp.displayName = msg('page.signup.title');

@@ -6,12 +6,23 @@ const initialLocale = 'en';
 export default {
   $pendingActions: {},
   auth: {
-    form: {
-      fields: {
-        username: '',
-        password: ''
+    forms: {
+      login: {
+        fields: {
+          username: '',
+          password: ''
+        },
+        error: null
       },
-      error: null
+      signUp: {
+        fields: {
+          name: '',
+          email: '',
+          password: '',
+          passwordConfirmation: ''
+        },
+        error: null
+      }
     }
   },
   i18n: {

@@ -1,13 +1,24 @@
 import DocumentTitle from 'react-document-title';
 import React from 'react';
 import {Link, RouteHandler} from 'react-router';
+import {AppCanvas, AppBar} from 'material-ui';
+import exposeRouter from '../components/exposerouter.react';
 import {isLoggedIn} from '../user/store';
 import {state} from '../state';
 
 // Leverage webpack require goodness for feature toggle based dead code removal.
 require('./app.less');
 
-export default class App extends React.Component {
+class App extends React.Component {
+
+  getAppBarTitle() {
+    const routes = this.props.router.getCurrentRoutes();
+    const breadCrumbs = routes.map(route => {
+      return route.handler.displayName ? route.handler.displayName : undefined;
+    }).filter(crumb => crumb != undefined);
+
+    return breadCrumbs.join(' > ');
+  }
 
   componentDidMount() {
     // Must be required here because there is no DOM in Node.js. Remember,
@@ -29,11 +40,23 @@ export default class App extends React.Component {
   render() {
     return (
       <DocumentTitle title='Este.js App'>
-        <div className="page">
+        <AppCanvas>
+          <AppBar
+            className="app-bar"
+            title={this.getAppBarTitle()}
+            zDepth={0}>
+          </AppBar>
+
           <RouteHandler />
-        </div>
+        </AppCanvas>
       </DocumentTitle>
     );
   }
 
 }
+
+App.propTypes = {
+  router: React.PropTypes.func
+};
+
+export default exposeRouter(App);

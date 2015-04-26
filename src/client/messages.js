@@ -2,7 +2,6 @@ export default {
   en: {
     auth: {
       form: {
-        legend: 'Login / Sign Up',
         placeholder: {
           username: 'username',
           password: 'password'
@@ -17,14 +16,13 @@ export default {
         button: 'Logout'
       }
     },
-    todos: {
-      add100: 'Add 100 Todos',
-      clearAll: 'Clear All',
-      newTodoPlaceholder: 'What needs to be done?',
-      undo: `Undo {steps, plural,
-        =0 {}
-        other {(#)}
-      }`
+    page: {
+      login: {
+        title: 'Login'
+      },
+      signup: {
+        title: 'Sign up'
+      }
     },
     validation: {
       required: `Please fill out {prop, select,

@@ -3,16 +3,24 @@ import setToString from '../../lib/settostring';
 import {ValidationError} from '../../lib/validation';
 import {dispatch} from '../dispatcher';
 import {validate} from '../validation';
-import {authenticate} from '../api';
+import {authenticate, createUser} from '../api';
 
-export function updateFormField({target: {name, value}}) {
+export function updateFormField({target: {name, value}}, form) {
   // Both email and password max length is 100.
   value = value.slice(0, 100);
-  dispatch(updateFormField, {name, value});
+  dispatch(updateFormField, {form, name, value});
+}
+
+export function updateLoginFormField(field, form) {
+  updateFormField(field, 'login');
+}
+
+export function updateSignUpFormField(field, form) {
+  updateFormField(field, 'signUp');
 }
 
 export function login(fields) {
-  return dispatch(login, validateForm(fields)
+  return dispatch(login, validateLoginForm(fields)
     .then(() => {
       return validateCredentials(fields);
     })
@@ -24,7 +32,7 @@ export function login(fields) {
   );
 }
 
-function validateForm(fields) {
+function validateLoginForm(fields) {
   return validate(fields)
     .prop('username').required()
     .prop('password').required().simplePassword()
@@ -50,6 +58,34 @@ export function logout() {
   location.href = '/';
 }
 
+export function register(fields) {
+  return dispatch(register, validateSignUpForm(fields)
+    .then(() => {
+      return createUser(fields.name, fields.email, fields.password)
+        .catch(res => {
+          if (res.badRequest) throw new ValidationError(res.body.message, res.body.prop);
+          throw res;
+        });
+    }).catch(error => {
+      registerError(error);
+      throw error;
+    }).then(authData => logged(authData))
+  );
+}
+
+export function registerError(error) {
+  dispatch(registerError, error);
+}
+
+function validateSignUpForm(fields) {
+  return validate(fields)
+    .prop('name').required()
+    .prop('email').required().email()
+    .prop('password').required().simplePassword()
+    .prop('passwordConfirmation').required().equals('password')
+    .promise;
+}
+
 setToString('auth', {
-  updateFormField, login, loginError, logged, logout
+  updateFormField, login, loginError, logged, logout, register, registerError
 });

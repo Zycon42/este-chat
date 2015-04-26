@@ -4,10 +4,12 @@ import React from 'react';
 import config from './config';
 import render from './render';
 import auth from './api/auth';
+import user from './api/user/';
 
 export default function(app) {
 
   app.use('/api/auth', auth);
+  app.use('/api/user', user);
 
   app.get('*', (req, res) => {
     const acceptsLanguages = req.acceptsLanguages(config.appLocales);

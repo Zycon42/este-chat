@@ -9,7 +9,9 @@ import User from '../user/model';
 passport.use(new LocalStrategy(
   Promise.coroutine(function*(username, password, done) {
     try {
-      const user = yield User.forge({username}).fetch({require: true});
+      const user = yield User.forge()
+        .query({where: {name: username}, orWhere: {email: username}})
+        .fetch({require: true});
       if (!(yield user.authenticate(password)))
         return done(null, false, {message: 'This password is not correct.'});
       return done(null, user);
