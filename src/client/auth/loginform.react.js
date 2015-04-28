@@ -1,5 +1,6 @@
 import React from 'react';
 import {TextField, FlatButton} from 'material-ui';
+import FlatButtonLink from '../components/flatbuttonlink.react';
 import exposeRouter from '../components/exposerouter.react';
 import {focusInvalidField} from '../../lib/validation';
 import {getLoginForm} from './store';
@@ -54,13 +55,10 @@ class LoginForm extends React.Component {
             disabled={login.pending}
             primary={true}
           />
-          {/* Simulate router link */}
-          <FlatButton label={msg('auth.form.button.signup')} secondary={true} linkButton={true}
-            href={this.props.router.makeHref("signup")}
-            onClick={(e) => {
-              e.preventDefault();
-              this.props.router.transitionTo("signup");
-            }}
+          <FlatButtonLink
+            to="signup"
+            label={msg('auth.form.button.signup')}
+            secondary={true}
           />
           {form.error &&
             <span className="error-message">{form.error.message}</span>

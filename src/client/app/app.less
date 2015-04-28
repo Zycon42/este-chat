@@ -15,6 +15,34 @@ body {
   position: absolute;
   height: 128px;
   z-index: 0;
+
+  @media only screen and (min-width: 48em) {
+    .mui-app-bar-navigation-icon-button {
+      visibility: hidden;
+    }
+  }
+
+  ul {
+    padding: 0;
+    list-style-type: none;
+    text-align: center;
+    line-height: 64px;
+
+    li {
+      float: left;
+      transition: background-color .3s;
+
+      a {
+        overflow: inherit;
+        background-color: transparent;
+        color: @dark-white;
+
+        &:hover {
+          background-color: @cyan-600;
+        }
+      }
+    }
+  }
 }
 
 .page-container {
@@ -23,6 +51,11 @@ body {
   .content {
     z-index: 1;
     background-color: #fff;
+
+    img {
+      display: block;
+      margin: auto;
+    }
 
     form {
       .form-field {
@@ -43,4 +76,8 @@ body {
   .content > div {
     padding: 2rem;
   }
+}
+
+.right {
+  float: right !important;
 }
