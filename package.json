@@ -48,7 +48,7 @@
     "jsonwebtoken": "^5.0.0",
     "knex": "^0.7.6",
     "less-loader": "^2.0.0",
-    "material-ui": "^0.7.3",
+    "material-ui": "^0.7.5",
     "node-notifier": "^4.1.0",
     "normalize.css": "^3.0.2",
     "passport": "^0.2.1",

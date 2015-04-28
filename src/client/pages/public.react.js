@@ -1,8 +1,8 @@
 import React from 'react';
-import {RouteHandler} from 'react-router';
+import {RouteHandler, Link} from 'react-router';
 import exposeRouter from '../components/exposerouter.react';
 import FlatButtonLink from '../components/flatbuttonlink.react';
-import {AppCanvas, AppBar, FlatButton} from 'material-ui';
+import {AppCanvas, AppBar, LeftNav} from 'material-ui';
 import {msg} from '../intl/store';
 
 class Public extends React.Component {
@@ -17,19 +17,39 @@ class Public extends React.Component {
   }
 
   render() {
+    const menuItems = [
+      { text: <Link to="login">{msg('auth.form.button.login')}</Link> },
+      { text: <Link to="signup">{msg('auth.form.button.signup')}</Link> }
+    ];
+
+    const header = (
+      <Link
+        to="/" className="logo"
+        onTouchTap={() => this.refs.leftNav.close()}
+        >
+        Este.js
+      </Link>
+    );
+
     return (
         <AppCanvas>
           <AppBar
             className="app-bar"
             title={this.getAppBarTitle()}
             zDepth={0}
-            //showMenuIconButton={false}
+            onMenuIconButtonTouchTap={() => this.refs.leftNav.toggle() }
           >
-            <ul className="right">
+            <ul className="right hidden-sm">
               <li><FlatButtonLink to="login" label={msg('auth.form.button.login')} /></li>
               <li><FlatButtonLink to="signup" label={msg('auth.form.button.signup')} /></li>
             </ul>
           </AppBar>
+
+          <LeftNav className="left-nav" ref="leftNav"
+            docked={false}
+            menuItems={menuItems}
+            header={header}
+          />
 
           <RouteHandler />
         </AppCanvas>

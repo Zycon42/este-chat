@@ -7,6 +7,7 @@
 
 @import '../../../node_modules/flexboxgrid/dist/flexboxgrid.css';
 
+
 body {
   background-color: @grey-100;
 }
@@ -16,7 +17,7 @@ body {
   height: 128px;
   z-index: 0;
 
-  @media only screen and (min-width: 48em) {
+  @media only screen and (min-width: 30em) {
     .mui-app-bar-navigation-icon-button {
       visibility: hidden;
     }
@@ -42,6 +43,29 @@ body {
         }
       }
     }
+  }
+}
+
+.left-nav {
+  .logo {
+    line-height: 64px;
+    font-size: 24px;
+    font-weight: 300;
+    background-color: @cyan-500;
+    color: @full-white;
+    padding-left: 24px;
+    padding-top: 0;
+    margin-bottom: 8px;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: inherit;
+    display: block;
+  }
+
+  a.active {
+    color: @pink-A200;
   }
 }
 
@@ -80,4 +104,10 @@ body {
 
 .right {
   float: right !important;
+}
+
+.hidden-sm {
+  @media (max-width: 30em) {
+    display: none !important;
+  }
 }
