@@ -1,10 +1,12 @@
 import DocumentTitle from 'react-document-title';
 import React from 'react';
 import {RouteHandler, Link} from 'react-router';
-import {AppCanvas, AppBar, LeftNav} from 'material-ui';
+import {AppCanvas, AppBar, LeftNav, FontIcon} from 'material-ui';
 import requireAuth from '../auth/requireauth.react';
 import ThreadList from '../chat/threadlist.react';
-import UserItem from '../chat/useritem.react';
+import AppBarTitle from '../chat/appbartitle.react';
+import NavigationHeader from '../chat/navigationheader.react';
+import Logout from '../auth/logout.react';
 import {getUser} from '../user/store';
 import {getThreadsChrono} from '../chat/store';
 import {state} from '../state';
@@ -48,24 +50,16 @@ class Chat extends React.Component {
     const threads = getThreadsChrono();
 
     const menuItems = [
-      { text: <div>Foo</div> },
+      { text: <Logout/> },
     ];
 
-    const header = (
-      <Link
-        to="home" className="logo"
-        onTouchTap={() => this.refs.leftNav.close()}
-        >
-        Chat
-      </Link>
-    );
-
+    const user = getUser();
     return (
       <DocumentTitle title="Este.js - Chat">
         <AppCanvas>
           <AppBar
             className="app-bar"
-            title={<div className="mui-app-bar-title"><UserItem user={getUser()} /></div>}
+            title={<AppBarTitle user={user} />}
             zDepth={0}
             onMenuIconButtonTouchTap={() => this.refs.leftNav.toggle() }
             >
@@ -74,7 +68,7 @@ class Chat extends React.Component {
           <LeftNav className="left-nav" ref="leftNav"
             docked={false}
             menuItems={menuItems}
-            header={header}
+            header={<NavigationHeader user={user} />}
           />
 
           <div className="page-container chat">

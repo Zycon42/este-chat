@@ -54,6 +54,7 @@ export function logged(authData) {
 }
 
 export function logout() {
+  dispatch(logout);
   // Always reload app on logout for security reasons.
   location.href = '/';
 }

@@ -7,6 +7,7 @@
 
 @import '../../../node_modules/flexboxgrid/dist/flexboxgrid.css';
 
+@import '../../../node_modules/mdi/css/materialdesignicons.css';
 
 body {
   background-color: @grey-100;
@@ -71,6 +72,18 @@ body {
   a.active {
     color: @pink-A200;
   }
+
+  .menu-item {
+    font-size: 14px;
+    font-weight: 500;
+
+    .mdi {
+      float: left;
+      font-size: 24px;
+      line-height: 48px;
+      margin-right: 24px;
+    }
+  }
 }
 
 .page-container {
@@ -106,9 +119,7 @@ body {
   }
 }
 
-.user-item {
-  line-height: normal;
-
+.chat-title {
   .avatar {
     float: left;
     margin-top: 10px;
@@ -119,6 +130,7 @@ body {
   .user-info {
     padding: 15px 10px;
     display: table-cell;
+    line-height: normal;
 
     .user-name {
       font-size: 16px;
@@ -127,6 +139,30 @@ body {
     .user-email {
       margin-top: 1px;
       font-size: 12px;
+    }
+  }
+}
+
+.navigation-header {
+  background-color: @cyan-500;
+  color: @full-white;
+  padding: 8px 24px;
+
+  .avatar {
+    border-radius: 3px;
+    margin-top: 8px;
+  }
+
+  .subtitle {
+    padding: 8px 0;
+
+    .user-name {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .user-email {
+      font-size: 14px;
     }
   }
 }
