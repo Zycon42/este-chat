@@ -61,7 +61,7 @@ class Chat extends React.Component {
     );
 
     return (
-      <DocumentTitle title="Chat">
+      <DocumentTitle title="Este.js - Chat">
         <AppCanvas>
           <AppBar
             className="app-bar"

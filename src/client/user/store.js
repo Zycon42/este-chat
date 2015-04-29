@@ -6,7 +6,7 @@ import {userCursor} from '../state';
 const getIn = (path) => userCursor().getIn(path);
 
 export const User = Record({
-  id: null, name: null, email: null
+  id: null, name: null, email: null, avatarUrl: null
 });
 
 const AuthData = Record({

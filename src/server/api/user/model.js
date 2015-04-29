@@ -1,12 +1,20 @@
 import bookshelf from '../../bookshelf';
 import bcrypt from 'bcrypt';
 import Promise from 'bluebird';
+import md5 from 'MD5';
 import {validate} from '../../../client/validation';
 import {ValidationError} from '../../../lib/validation';
 
 const User = bookshelf.Model.extend({
   tableName: 'user',
   hidden: ['password'],
+
+  virtuals: {
+    avatarUrl: function() {
+      const hash = md5(this.get('email').trim().toLowerCase());
+      return `https://www.gravatar.com/avatar/${hash}?d=identicon`;
+    }
+  },
 
   initialize: function() {
     this.on('saving', this.validate);
