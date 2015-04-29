@@ -4,4 +4,7 @@ import knexConfig from '../../knexfile';
 
 const knex = Knex(knexConfig[process.env.NODE_ENV]);
 
-export default Bookshelf(knex);
+const Orm = Bookshelf(knex);
+Orm.plugin('visibility');
+
+export default Orm;

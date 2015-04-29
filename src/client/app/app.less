@@ -14,11 +14,11 @@ body {
 
 .app-bar {
   position: absolute;
-  height: 128px;
+  height: 64px;
   z-index: 0;
 
   @media only screen and (min-width: 30em) {
-    .mui-app-bar-navigation-icon-button {
+    &.icon-hidden-xs .mui-app-bar-navigation-icon-button {
       visibility: hidden;
     }
   }
@@ -44,6 +44,10 @@ body {
       }
     }
   }
+}
+
+.app-bar-extended {
+  height: 128px;
 }
 
 .left-nav {
@@ -99,6 +103,31 @@ body {
 
   .content > div {
     padding: 2rem;
+  }
+}
+
+.user-item {
+  line-height: normal;
+
+  .avatar {
+    float: left;
+    margin-top: 10px;
+    display: table-cell;
+    border-radius: 3px;
+  }
+
+  .user-info {
+    padding: 15px 10px;
+    display: table-cell;
+
+    .user-name {
+      font-size: 16px;
+    }
+
+    .user-email {
+      margin-top: 1px;
+      font-size: 12px;
+    }
   }
 }
 

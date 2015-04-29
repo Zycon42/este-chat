@@ -1,8 +1,11 @@
 import DocumentTitle from 'react-document-title';
 import React from 'react';
-import {RouteHandler} from 'react-router';
+import {RouteHandler, Link} from 'react-router';
+import {AppCanvas, AppBar, LeftNav} from 'material-ui';
 import requireAuth from '../auth/requireauth.react';
 import ThreadList from '../chat/threadlist.react';
+import UserItem from '../chat/useritem.react';
+import {getUser} from '../user/store';
 import {getThreadsChrono} from '../chat/store';
 import {state} from '../state';
 
@@ -44,12 +47,41 @@ class Chat extends React.Component {
   render() {
     const threads = getThreadsChrono();
 
+    const menuItems = [
+      { text: <div>Foo</div> },
+    ];
+
+    const header = (
+      <Link
+        to="home" className="logo"
+        onTouchTap={() => this.refs.leftNav.close()}
+        >
+        Chat
+      </Link>
+    );
+
     return (
       <DocumentTitle title="Chat">
-        <div className="chat">
-          <ThreadList threads={threads}/>
-          <RouteHandler />
-        </div>
+        <AppCanvas>
+          <AppBar
+            className="app-bar"
+            title={<div className="mui-app-bar-title"><UserItem user={getUser()} /></div>}
+            zDepth={0}
+            onMenuIconButtonTouchTap={() => this.refs.leftNav.toggle() }
+            >
+          </AppBar>
+
+          <LeftNav className="left-nav" ref="leftNav"
+            docked={false}
+            menuItems={menuItems}
+            header={header}
+          />
+
+          <div className="page-container chat">
+            <ThreadList threads={threads}/>
+            <RouteHandler />
+          </div>
+        </AppCanvas>
       </DocumentTitle>
     )
   }

@@ -34,7 +34,7 @@ class Public extends React.Component {
     return (
         <AppCanvas>
           <AppBar
-            className="app-bar"
+            className="app-bar app-bar-extended icon-hidden-xs"
             title={this.getAppBarTitle()}
             zDepth={0}
             onMenuIconButtonTouchTap={() => this.refs.leftNav.toggle() }

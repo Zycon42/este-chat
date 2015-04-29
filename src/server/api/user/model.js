@@ -6,6 +6,7 @@ import {ValidationError} from '../../../lib/validation';
 
 const User = bookshelf.Model.extend({
   tableName: 'user',
+  hidden: ['password'],
 
   initialize: function() {
     this.on('saving', this.validate);
