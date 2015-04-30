@@ -10,7 +10,8 @@ export function create(req, res) {
     }).save();
   }).then(user => {
     var token = jwt.sign({ id: user.id }, config.secret);
-    res.status(201).location(user.id).json({token, user: user.toJSON() });
+    res.cookie('token', token);
+    res.status(201).location(user.id).json(user.toJSON());
   }).catch(error => {
     if (error instanceof ValidationError)
       return res.status(400).json(error);

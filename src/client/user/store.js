@@ -1,5 +1,6 @@
 import {Record, fromJS} from 'immutable';
-import {logged} from '../auth/actions';
+import Cookies from 'cookies-js';
+import {logged, logout} from '../auth/actions';
 import {register} from '../dispatcher';
 import {userCursor} from '../state';
 
@@ -9,34 +10,68 @@ export const User = Record({
   id: null, name: null, email: null, avatarUrl: null
 });
 
-const AuthData = Record({
-  token: null, user: new User()
-});
+const dataKey = 'authData';
+
+function unserializeDataFromStorage() {
+  // local storage is available only on client
+  if (process.env.IS_BROWSER) {
+    return JSON.parse(localStorage.getItem(dataKey));
+  }
+  return null;
+}
+
+function serializeDataToStorage(json) {
+  // local storage is available only on client
+  if (process.env.IS_BROWSER) {
+    localStorage.setItem(dataKey, JSON.stringify(json));
+  }
+}
+
+export function loadDataFromJS(json) {
+  return fromJS(json, (key, value) => {
+    if (key === '') return new User(value);
+  })
+}
+
+function storeData(data) {
+   userCursor(user => { return user.setIn([dataKey], data); });
+}
+
+function getAuthData() {
+  const cached = getIn([dataKey]);
+  if (!cached) {
+    const fromStorage = loadDataFromJS(unserializeDataFromStorage());
+    storeData(fromStorage);
+    return fromStorage;
+  }
+  return cached;
+}
 
 export const dispatchToken = register(({action, data}) => {
 
   switch (action) {
     case logged:
-      userCursor(user => {
-        return user.setIn(['authData'], fromJS(data, (key, value) => {
-          if (key === 'user') return new User(value);
-          if (key === '') return new AuthData(value);
-        }));
-      });
+      storeData(loadDataFromJS(data));
+      serializeDataToStorage(data);
+      break;
+
+    case logout:
+      storeData(null);
+      serializeDataToStorage(null);
+      Cookies.expire('token');
       break;
   }
 
 });
 
 export function isLoggedIn() {
-  // TODO: Use sessionStorage and real redirect to fix Chrome.
-  return !!getIn(['authData']);
+  return !!getAuthData();
 }
 
 export function getToken() {
-  return isLoggedIn() ? getIn(['authData']).token : null;
+  return Cookies.get('token');
 }
 
 export function getUser() {
-  return isLoggedIn() ? getIn(['authData']).user : null;
+  return isLoggedIn() ? getAuthData() : null;
 }

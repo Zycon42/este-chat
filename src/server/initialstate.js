@@ -57,13 +57,6 @@ export default {
       {id: 7, authorName: 'Brian', text: 'At ForwardJS?  Yeah, of course.  See you there!', date: Date.now() - 39999}
     ]
   },
-  newTodo: {
-    title: ''
-  },
-  todos: [
-    {id: 1, title: 'consider ‘stop doing’ app'},
-    {id: 2, title: 'relax'}
-  ],
   user: {
     authData: null
   }

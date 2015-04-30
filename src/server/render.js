@@ -10,13 +10,19 @@ import {state} from '../client/state';
 
 export default function render(req, res, locale) {
   const url = req.originalUrl;
-  return loadData(url, locale)
+  return loadData(url, locale, req.user)
     .then((appState) => renderPage(res, appState, url));
 }
 
-function loadData(url, locale) {
+function loadData(url, locale, user) {
   // TODO: Preload and merge user specific state.
   const appState = initialState;
+  if (user) {
+    appState.user.authData = user;
+  } else {
+    appState.user.authData = null;
+  }
+
   return new Promise((resolve, reject) => {
     resolve(appState);
   });
@@ -40,8 +46,8 @@ function renderPage(res, appState, url) {
         reject(abortReason);
       }
     });
+    state.load(appState);
     router.run((Handler, routerState) => {
-      state.load(appState);
       const html = getPageHtml(Handler, appState);
       const notFound = routerState.routes.some(route => route.name === 'not-found');
       const status = notFound ? 404 : 200;

@@ -31,7 +31,8 @@ router.post('/', function(req, res, next) {
     }
 
     var token = jwt.sign({ id: user.id }, config.secret);
-    res.json({ token : token, user: user.toJSON() });
+    res.cookie('token', token);
+    res.json(user.toJSON());
   })(req, res, next);
 });
 

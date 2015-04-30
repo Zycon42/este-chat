@@ -2,6 +2,7 @@
 
 import compression from 'compression';
 import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 import config from './config';
 import express from 'express';
 // import favicon from 'serve-favicon';
@@ -14,6 +15,7 @@ export default function() {
   app.use(compression());
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({extended: false}));
+  app.use(cookieParser());
   // TODO: Add favicon.
   // app.use(favicon('assets/img/favicon.ico'))
   // TODO: Move to CDN.

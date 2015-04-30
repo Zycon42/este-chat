@@ -1,6 +1,7 @@
 import State from '../lib/state';
 import Immutable from 'immutable';
 import {Thread, Message} from './chat/store';
+import {loadDataFromJS} from './user/store';
 
 const initialState = process.env.IS_BROWSER
   ? window._appState
@@ -33,6 +34,10 @@ export const state = new State(initialState, function (key, value) {
         });
       }).toList();
     }).toMap();
+  }
+
+  if (key === 'authData') {
+    return loadDataFromJS(value.toJS());
   }
 
   var isIndexed = Immutable.Iterable.isIndexed(value);
