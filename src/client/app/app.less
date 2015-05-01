@@ -1,16 +1,20 @@
 /** material ui */
-@import '../../../node_modules/material-ui/src/less/scaffolding.less';
-@import '../../../node_modules/material-ui/src/less/components.less';
+@import '~material-ui/src/less/scaffolding.less';
+@import '~material-ui/src/less/components.less';
 
 /** Google web Roboto font */
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
 
-@import '../../../node_modules/flexboxgrid/dist/flexboxgrid.css';
+@import '~flexboxgrid/dist/flexboxgrid.css';
 
-@import '../../../node_modules/mdi/css/materialdesignicons.css';
+@import '~mdi/css/materialdesignicons.css';
 
 body {
   background-color: @grey-100;
+}
+
+#app, .mui-app-canvas, .page-container-fluid {
+  height: 100%;
 }
 
 .app-bar {
@@ -86,7 +90,7 @@ body {
   }
 }
 
-.page-container {
+.page-container, .page-container-fluid {
   padding-top: 64px;
 
   .content {
@@ -119,17 +123,27 @@ body {
   }
 }
 
+.page-container-fluid {
+  >.row {
+    margin: 0;
+    height: 100%;
+
+    >div {
+      padding: 0;
+    }
+  }
+}
+
 .chat-title {
   .avatar {
     float: left;
     margin-top: 10px;
-    display: table-cell;
     border-radius: 3px;
   }
 
   .user-info {
+    margin-left: 44px;
     padding: 15px 10px;
-    display: table-cell;
     line-height: normal;
 
     .user-name {
@@ -164,6 +178,14 @@ body {
     .user-email {
       font-size: 14px;
     }
+  }
+}
+
+.flex-paper {
+  flex: 1;
+  display: flex;
+  >.mui-paper-container {
+    height: inherit;
   }
 }
 

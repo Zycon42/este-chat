@@ -1,7 +1,7 @@
 import DocumentTitle from 'react-document-title';
 import React from 'react';
 import {RouteHandler, Link} from 'react-router';
-import {AppCanvas, AppBar, LeftNav, FontIcon} from 'material-ui';
+import {AppCanvas, AppBar, LeftNav, FontIcon, Paper} from 'material-ui';
 import requireAuth from '../auth/requireauth.react';
 import ThreadList from '../chat/threadlist.react';
 import AppBarTitle from '../chat/appbartitle.react';
@@ -12,7 +12,7 @@ import {getThreadsChrono} from '../chat/store';
 import {state} from '../state';
 
 // Leverage webpack require goodness for feature toggle based dead code removal.
-require('./chat.styl');
+require('./chat.less');
 
 class Chat extends React.Component {
 
@@ -71,9 +71,19 @@ class Chat extends React.Component {
             header={<NavigationHeader user={user} />}
           />
 
-          <div className="page-container chat">
-            <ThreadList threads={threads}/>
-            <RouteHandler />
+          <div className="page-container-fluid">
+            <div className="row">
+              <div className="col-xs-12 col-md-4">
+                <Paper className="flex-paper" rounded={false}>
+                  <ThreadList threads={threads}/>
+                </Paper>
+              </div>
+              <div className="col-xs-12 col-md-8">
+                <Paper className="flex-paper" rounded={false}>
+                  <RouteHandler />
+                </Paper>
+              </div>
+            </div>
           </div>
         </AppCanvas>
       </DocumentTitle>
