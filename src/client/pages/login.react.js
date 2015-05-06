@@ -10,7 +10,7 @@ export default class Login extends React.Component {
       <div className="container-fluid page-container">
         <div className="row">
           <div className="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6">
-            <Paper className="content">
+            <Paper className="form-container">
               <img src="assets/img/logo.png" />
               <LoginForm />
             </Paper>

@@ -7,7 +7,7 @@ export default class ThreadList extends LinkComponent {
 
   render() {
     return (
-      <div className="thread-section">
+      <div className="col-xs-12">
         <ul className="thread-list">
           {this.props.threads.map((thread, i) => {
             return <ThreadListItem key={thread.id} thread={thread} />;

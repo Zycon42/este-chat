@@ -92,35 +92,6 @@ body {
 
 .page-container, .page-container-fluid {
   padding-top: 64px;
-
-  .content {
-    z-index: 1;
-    background-color: #fff;
-
-    img {
-      display: block;
-      margin: auto;
-    }
-
-    form {
-      .form-field {
-        width: 100%;
-      }
-
-      button, a {
-        float: right;
-        margin-top: 2rem;
-      }
-
-      .error-message {
-        color: red;
-      }
-    }
-  }
-
-  .content > div {
-    padding: 2rem;
-  }
 }
 
 .page-container-fluid {
@@ -157,6 +128,35 @@ body {
   }
 }
 
+.form-container {
+  z-index: 1;
+  background-color: #fff;
+
+  img {
+    display: block;
+    margin: auto;
+  }
+
+  form {
+    .form-field {
+      width: 100%;
+    }
+
+    button, a {
+      float: right;
+      margin-top: 2rem;
+    }
+
+    .error-message {
+      color: red;
+    }
+  }
+
+  >div {
+    padding: 2rem;
+  }
+}
+
 .navigation-header {
   background-color: @cyan-500;
   color: @full-white;
@@ -186,6 +186,7 @@ body {
   display: flex;
   >.mui-paper-container {
     height: inherit;
+    margin: 0;
   }
 }
 

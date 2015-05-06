@@ -74,12 +74,12 @@ class Chat extends React.Component {
           <div className="page-container-fluid">
             <div className="row">
               <div className="col-xs-12 col-md-4">
-                <Paper className="flex-paper" rounded={false}>
+                <Paper className="flex-paper" innerClassName="row" rounded={false}>
                   <ThreadList threads={threads}/>
                 </Paper>
               </div>
               <div className="col-xs-12 col-md-8">
-                <Paper className="flex-paper" rounded={false}>
+                <Paper className="flex-paper" innerClassName="row" rounded={false}>
                   <RouteHandler />
                 </Paper>
               </div>
