@@ -8,8 +8,17 @@ import shallowEqual from 'react/lib/shallowEqual';
 export default class PureComponent extends React.Component {
 
   shouldComponentUpdate(nextProps, nextState) {
+    // https://github.com/rackt/react-router/issues/866
+    if (this.context.router) {
+      const changed = this.pureComponentLastPath !== this.context.router.getCurrentPath();
+      this.pureComponentLastPath = this.context.router.getCurrentPath();
+      if (changed) return true;
+    }
+
     return !shallowEqual(this.props, nextProps) ||
            !shallowEqual(this.state, nextState);
   }
 
 }
+
+PureComponent.contextTypes = {router: React.PropTypes.func};

@@ -27,8 +27,7 @@ export function login(fields) {
     .catch(error => {
       loginError(error);
       throw error;
-    })
-    .then((authData) => logged(authData))
+    }).then(authData => logged(authData))
   );
 }
 
@@ -49,14 +48,14 @@ export function loginError(error) {
   dispatch(loginError, error);
 }
 
-export function logged(authData) {
-  dispatch(logged, authData);
-}
-
 export function logout() {
   dispatch(logout);
   // Always reload app on logout for security reasons.
   location.href = '/';
+}
+
+export function logged(authData) {
+  dispatch(logged, authData);
 }
 
 export function register(fields) {

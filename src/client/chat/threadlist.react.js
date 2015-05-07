@@ -1,9 +1,9 @@
-import LinkComponent from '../components/linkcomponent.react';
+import PureComponent from '../components/purecomponent.react';
 import React from 'react';
 import ThreadListItem from './threadlistitem.react';
 import immutable from 'immutable';
 
-export default class ThreadList extends LinkComponent {
+export default class ThreadList extends PureComponent {
 
   render() {
     return (

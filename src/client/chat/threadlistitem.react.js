@@ -1,9 +1,9 @@
-import LinkComponent from '../components/linkcomponent.react';
+import PureComponent from '../components/purecomponent.react';
 import React from 'react';
 import {Link} from 'react-router';
 import {Thread} from './store';
 
-export default class ThreadListItem extends LinkComponent {
+export default class ThreadListItem extends PureComponent {
 
   render() {
     const thread = this.props.thread;
