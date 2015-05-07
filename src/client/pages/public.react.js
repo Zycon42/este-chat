@@ -10,23 +10,20 @@ class Public extends React.Component {
   getAppBarTitle() {
     const routes = this.props.router.getCurrentRoutes();
     const breadCrumbs = routes.map(route => {
-      return route.handler.displayName ? route.handler.displayName : undefined;
-    }).filter(crumb => crumb != undefined);
+      return route.handler.displayName ? route.handler.displayName : null;
+    }).filter(crumb => !!crumb);
 
     return breadCrumbs.join(' > ');
   }
 
   render() {
     const menuItems = [
-      { text: <Link to="login">{msg('auth.form.button.login')}</Link> },
-      { text: <Link to="signup">{msg('auth.form.button.signup')}</Link> }
+      {text: <Link to="login">{msg('auth.form.button.login')}</Link>},
+      {text: <Link to="signup">{msg('auth.form.button.signup')}</Link>}
     ];
 
     const header = (
-      <Link
-        to="/" className="logo"
-        onTouchTap={() => this.refs.leftNav.close()}
-        >
+      <Link className="logo" onTouchTap={() => this.refs.leftNav.close()} to="/" >
         Este.js
       </Link>
     );
@@ -35,20 +32,20 @@ class Public extends React.Component {
         <AppCanvas>
           <AppBar
             className="app-bar app-bar-extended icon-hidden-xs"
+            onMenuIconButtonTouchTap={() => this.refs.leftNav.toggle() }
             title={this.getAppBarTitle()}
             zDepth={0}
-            onMenuIconButtonTouchTap={() => this.refs.leftNav.toggle() }
           >
             <ul className="right hidden-sm">
-              <li><FlatButtonLink to="login" label={msg('auth.form.button.login')} /></li>
-              <li><FlatButtonLink to="signup" label={msg('auth.form.button.signup')} /></li>
+              <li><FlatButtonLink label={msg('auth.form.button.login')} to="login" /></li>
+              <li><FlatButtonLink label={msg('auth.form.button.signup')} to="signup" /></li>
             </ul>
           </AppBar>
 
-          <LeftNav className="left-nav" ref="leftNav"
-            docked={false}
-            menuItems={menuItems}
+          <LeftNav className="left-nav" docked={false}
             header={header}
+            menuItems={menuItems}
+            ref="leftNav"
           />
 
           <RouteHandler />

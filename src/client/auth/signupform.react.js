@@ -1,6 +1,5 @@
 import React from 'react';
 import {TextField, FlatButton} from 'material-ui';
-import {msg} from '../intl/store';
 import exposeRouter from '../components/exposerouter.react';
 import {focusInvalidField} from '../../lib/validation';
 import {getSignUpForm} from './store';
@@ -25,42 +24,42 @@ class SignUpForm extends React.Component {
         <fieldset>
           <TextField
             className="form-field"
+            disabled={register.pending}
             floatingLabelText="Name"
             hintText="Your name"
             name="name"
-            value={form.fields.name}
             onChange={updateSignUpFormField}
-            disabled={register.pending}
+            value={form.fields.name}
           />
           <TextField
             className="form-field"
+            disabled={register.pending}
             floatingLabelText="Email"
             hintText="your@email.com"
             name="email"
+            onChange={updateSignUpFormField}
             type="email"
             value={form.fields.email}
-            onChange={updateSignUpFormField}
-            disabled={register.pending}
           />
           <TextField
             className="form-field"
+            disabled={register.pending}
             floatingLabelText="Password"
             hintText="password"
-            type="password"
             name="password"
-            value={form.fields.password}
             onChange={updateSignUpFormField}
-            disabled={register.pending}
+            type="password"
+            value={form.fields.password}
           />
           <TextField
             className="form-field"
+            disabled={register.pending}
             floatingLabelText="Confirm your password"
             hintText="password"
-            type="password"
             name="passwordConfirmation"
-            value={form.fields.passwordConfirmation}
             onChange={updateSignUpFormField}
-            disabled={register.pending}
+            type="password"
+            value={form.fields.passwordConfirmation}
           />
           <FlatButton
             label="Sign up"

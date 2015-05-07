@@ -61,5 +61,5 @@ function resetSignUpForm(auth) {
     .setIn(['forms', 'signUp', 'error'], null)
     .setIn(['forms', 'signUp', 'fields'], {
       name: '', email: '', password: '', passwordConfirmation: ''
-    })
+    });
 }

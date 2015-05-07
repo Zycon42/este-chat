@@ -18,4 +18,4 @@ export default class AppBarTitle extends PureComponent {
 
 AppBarTitle.propTypes = {
   user: React.PropTypes.instanceOf(User)
-}
+};

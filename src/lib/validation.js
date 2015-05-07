@@ -43,7 +43,7 @@ export default class Validation {
     const object = this._object;
     this.promise = this.promise.then(() => {
       if (required && !this._isEmptyString(value)) return;
-      return callback(value, prop, object);
+      callback(value, prop, object);
     });
     return this;
   }

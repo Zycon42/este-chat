@@ -26,11 +26,10 @@ let router = express.Router();
 router.post('/', function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
     if (err) return next(err);
-    if (!user) {
+    if (!user)
       return res.status(401).json({message: 'Authentication failed!'});
-    }
 
-    var token = jwt.sign({ id: user.id }, config.secret);
+    var token = jwt.sign({id: user.id}, config.secret);
     res.cookie('token', token);
     res.json(user.toJSON());
   })(req, res, next);

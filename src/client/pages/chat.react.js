@@ -1,7 +1,7 @@
 import DocumentTitle from 'react-document-title';
 import React from 'react';
-import {RouteHandler, Link} from 'react-router';
-import {AppCanvas, AppBar, LeftNav, FontIcon, Paper} from 'material-ui';
+import {RouteHandler} from 'react-router';
+import {AppCanvas, AppBar, LeftNav, Paper} from 'material-ui';
 import requireAuth from '../auth/requireauth.react';
 import ThreadList from '../chat/threadlist.react';
 import AppBarTitle from '../chat/appbartitle.react';
@@ -50,7 +50,7 @@ class Chat extends React.Component {
     const threads = getThreadsChrono();
 
     const menuItems = [
-      { text: <Logout/> },
+      {text: <Logout/>}
     ];
 
     const user = getUser();
@@ -59,16 +59,14 @@ class Chat extends React.Component {
         <AppCanvas>
           <AppBar
             className="app-bar"
+            onMenuIconButtonTouchTap={() => this.refs.leftNav.toggle() }
             title={<AppBarTitle user={user} />}
             zDepth={0}
-            onMenuIconButtonTouchTap={() => this.refs.leftNav.toggle() }
-            >
-          </AppBar>
+          />
 
-          <LeftNav className="left-nav" ref="leftNav"
-            docked={false}
-            menuItems={menuItems}
+          <LeftNav className="left-nav" docked={false}
             header={<NavigationHeader user={user} />}
+            menuItems={menuItems} ref="leftNav"
           />
 
           <div className="page-container-fluid">
@@ -87,7 +85,7 @@ class Chat extends React.Component {
           </div>
         </AppCanvas>
       </DocumentTitle>
-    )
+    );
   }
 }
 

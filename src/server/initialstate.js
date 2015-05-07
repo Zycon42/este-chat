@@ -43,8 +43,8 @@ export default {
   },
   messages: {
     1: [
-      {id: 1, authorName: 'Bill', text: 'Hey Jing, want to give a Flux talk at ForwardJS?', date: Date.now() - 99999 },
-      {id: 2, authorName: 'Bill', text: 'Seems like a pretty cool conference.', date: Date.now() - 89999 },
+      {id: 1, authorName: 'Bill', text: 'Hey Jing, want to give a Flux talk at ForwardJS?', date: Date.now() - 99999},
+      {id: 2, authorName: 'Bill', text: 'Seems like a pretty cool conference.', date: Date.now() - 89999},
       {id: 3, authorName: 'Jing', text: 'Sounds good.  Will they be serving dessert?', date: Date.now() - 79999}
     ],
     2: [

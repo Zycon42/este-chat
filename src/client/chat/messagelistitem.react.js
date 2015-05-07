@@ -20,4 +20,4 @@ export default class MessageListItem extends PureComponent {
 
 MessageListItem.propTypes = {
   message: React.PropTypes.instanceOf(Message)
-}
+};

@@ -20,7 +20,7 @@ class ChatThread extends React.Component {
         <h3>{thread.name}</h3>
         <ul className="message-list" ref="messageList">
           {messages.map(message => {
-            return <MessageListItem key={message.id} message={message}/>
+            return <MessageListItem key={message.id} message={message}/>;
           })}
         </ul>
         <MessageComposer />

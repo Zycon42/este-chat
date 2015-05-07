@@ -17,11 +17,10 @@ export default function render(req, res, locale) {
 function loadData(url, locale, user) {
   // TODO: Preload and merge user specific state.
   const appState = initialState;
-  if (user) {
+  if (user)
     appState.user.authData = user;
-  } else {
+  else
     appState.user.authData = null;
-  }
 
   return new Promise((resolve, reject) => {
     resolve(appState);

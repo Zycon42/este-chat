@@ -11,7 +11,7 @@ export default class ThreadListItem extends PureComponent {
 
     return (
       <li className="thread-list-item">
-        <Link to="thread" params={{threadId: thread.id}}>
+        <Link params={{threadId: thread.id}} to="thread">
           <h5 className="thread-name">{thread.name}</h5>
           <div className="thread-time">
             {lastMessage.date.toLocaleTimeString()}

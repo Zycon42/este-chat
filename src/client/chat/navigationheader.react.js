@@ -8,10 +8,10 @@ export default class NavigationHeader extends PureComponent {
     const user = this.props.user;
     return (
       <div className="navigation-header">
-        <img className="avatar" height="64" src={this.props.user.avatarUrl} />
+        <img className="avatar" height="64" src={user.avatarUrl} />
         <div className="subtitle">
-          <div className="user-name">{this.props.user.name}</div>
-          <div className="user-email">{this.props.user.email}</div>
+          <div className="user-name">{user.name}</div>
+          <div className="user-email">{user.email}</div>
         </div>
       </div>
     );
@@ -20,4 +20,4 @@ export default class NavigationHeader extends PureComponent {
 
 NavigationHeader.propTypes = {
   user: React.PropTypes.instanceOf(User)
-}
+};

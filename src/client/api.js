@@ -14,7 +14,7 @@ let _pendingRequests = {};
 
 function abortPendingRequest(key) {
   if (_pendingRequests[key]) {
-    _pendingRequests[key]._callback = function(){};
+    _pendingRequests[key]._callback = function() {};
     _pendingRequests[key].abort();
     _pendingRequests[key] = null;
   }
@@ -36,10 +36,9 @@ function send(key, req) {
   return new Promise((resolve, reject) => {
     req.end((err, res) => {
       if (err) {
-        if (!err.response) {
+        if (!err.response)
           // severe error like no network etc.
           return reject(new RequestError(err));
-        }
 
         return reject(err.response);
       }

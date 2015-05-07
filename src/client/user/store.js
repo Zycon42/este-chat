@@ -14,27 +14,25 @@ const dataKey = 'authData';
 
 function unserializeDataFromStorage() {
   // local storage is available only on client
-  if (process.env.IS_BROWSER) {
+  if (process.env.IS_BROWSER)
     return JSON.parse(localStorage.getItem(dataKey));
-  }
   return null;
 }
 
 function serializeDataToStorage(json) {
   // local storage is available only on client
-  if (process.env.IS_BROWSER) {
+  if (process.env.IS_BROWSER)
     localStorage.setItem(dataKey, JSON.stringify(json));
-  }
 }
 
 export function loadDataFromJS(json) {
   return fromJS(json, (key, value) => {
     if (key === '') return new User(value);
-  })
+  });
 }
 
 function storeData(data) {
-   userCursor(user => { return user.setIn([dataKey], data); });
+  userCursor(user => { return user.setIn([dataKey], data); });
 }
 
 function getAuthData() {

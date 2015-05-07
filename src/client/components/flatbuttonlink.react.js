@@ -42,12 +42,12 @@ export default class FlatButtonLink extends React.Component {
    * the value of the activeClassName property when this <Link> is active.
    */
   getClassName() {
-    var className = this.props.className
+    var className = this.props.className;
 
     if (this.getActiveState())
-      className += ` ${ this.props.activeClassName }`
+      className += ` ${ this.props.activeClassName }`;
 
-    return className
+    return className;
   }
 
   getActiveState() {
@@ -59,8 +59,8 @@ export default class FlatButtonLink extends React.Component {
       this.props.style = this.props.activeStyle;
 
     return (
-      <FlatButton {...this.props} linkButton={true}
-        href={this.getHref()} className={this.getClassName()} onClick={e => this.handleClick(e)}>
+      <FlatButton {...this.props} className={this.getClassName()}
+        href={this.getHref()} linkButton={true} onClick={e => this.handleClick(e)}>
         {this.props.children}
       </FlatButton>
     );
@@ -69,18 +69,19 @@ export default class FlatButtonLink extends React.Component {
 
 FlatButtonLink.contextTypes = {
   router: React.PropTypes.func.isRequired
-}
+};
 
 FlatButtonLink.propTypes = {
   activeClassName: React.PropTypes.string.isRequired,
-  to: React.PropTypes.string.isRequired,
+  activeStyle: React.PropTypes.object,
+  className: React.PropTypes.string,
+  onClick: React.PropTypes.func,
   params: React.PropTypes.object,
   query: React.PropTypes.object,
-  activeStyle: React.PropTypes.object,
-  onClick: React.PropTypes.func
-}
+  to: React.PropTypes.string.isRequired
+};
 
 FlatButtonLink.defaultProps = {
   activeClassName: 'active',
   className: ''
-}
+};

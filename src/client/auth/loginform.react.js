@@ -33,32 +33,32 @@ class LoginForm extends React.Component {
         <fieldset>
           <TextField
             className="form-field"
+            disabled={login.pending}
             floatingLabelText="Username"
             hintText={msg('auth.form.placeholder.username')}
-            value={form.fields.username}
-            onChange={updateLoginFormField}
-            disabled={login.pending}
             name="username"
+            onChange={updateLoginFormField}
+            value={form.fields.username}
           />
           <TextField
             className="form-field"
+            disabled={login.pending}
             floatingLabelText="Password"
             hintText={msg('auth.form.placeholder.password')}
-            disabled={login.pending}
-            name="password"
+                        name="password"
             onChange={updateLoginFormField}
             type="password"
             value={form.fields.password}
           />
           <FlatButton
-            label={msg('auth.form.button.login')}
             disabled={login.pending}
+            label={msg('auth.form.button.login')}
             primary={true}
           />
           <FlatButtonLink
-            to="signup"
             label={msg('auth.form.button.signup')}
             secondary={true}
+            to="signup"
           />
           {form.error &&
             <span className="error-message">{form.error.message}</span>

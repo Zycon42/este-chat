@@ -12,8 +12,8 @@ import {DefaultRoute, NotFoundRoute, Route, Redirect} from 'react-router';
 export default (
   <Route handler={App} path="/">
     <Route handler={Chat} path="thread">
-      <Route name="thread" path=":threadId" handler={ChatThread} />
-      <DefaultRoute name="home" handler={ChatHome} />
+      <Route handler={ChatThread} name="thread" path=":threadId" />
+      <DefaultRoute handler={ChatHome} name="home" />
     </Route>
     <Redirect from="/" to="home" />
     <Route handler={Public}>

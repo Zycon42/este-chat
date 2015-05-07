@@ -1,3 +1,5 @@
+/*eslint-disable no-console */
+
 import config from '../../config';
 import jwt from 'jsonwebtoken';
 import User from './model';
@@ -9,7 +11,7 @@ export function create(req, res) {
       name: req.body.name, email: req.body.email, password: hash
     }).save();
   }).then(user => {
-    var token = jwt.sign({ id: user.id }, config.secret);
+    var token = jwt.sign({id: user.id}, config.secret);
     res.cookie('token', token);
     res.status(201).location(user.id).json(user.toJSON());
   }).catch(error => {

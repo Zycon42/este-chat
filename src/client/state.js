@@ -7,8 +7,8 @@ const initialState = process.env.IS_BROWSER
   ? window._appState
   : require('../server/initialstate');
 
-export const state = new State(initialState, function (key, value) {
-  if (key === 'threads') {
+export const state = new State(initialState, function(key, value) {
+  if (key === 'threads')
     return value.map(thread => {
       return new Thread({
         id: thread.get('id'),
@@ -21,9 +21,8 @@ export const state = new State(initialState, function (key, value) {
         })
       });
     }).toMap();
-  }
 
-  if (this == initialState && key === 'messages') {
+  if (this === initialState && key === 'messages')
     return value.map(messages => {
       return messages.map(message => {
         return new Message({
@@ -34,11 +33,9 @@ export const state = new State(initialState, function (key, value) {
         });
       }).toList();
     }).toMap();
-  }
 
-  if (key === 'authData') {
+  if (key === 'authData')
     return loadDataFromJS(value.toJS());
-  }
 
   var isIndexed = Immutable.Iterable.isIndexed(value);
   return isIndexed ? value.toList() : value.toMap();

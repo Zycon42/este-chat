@@ -1,5 +1,3 @@
-'use strict';
-
 exports.up = function(knex, Promise) {
   return Promise.join(
     knex.schema.createTable('user', function(table) {
