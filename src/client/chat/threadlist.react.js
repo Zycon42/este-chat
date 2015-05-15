@@ -1,7 +1,7 @@
+import immutable from 'immutable';
 import PureComponent from '../components/purecomponent.react';
 import React from 'react';
 import ThreadListItem from './threadlistitem.react';
-import immutable from 'immutable';
 
 export default class ThreadList extends PureComponent {
 
@@ -10,7 +10,7 @@ export default class ThreadList extends PureComponent {
       <div className="col-xs-12">
         <ul className="thread-list">
           {this.props.threads.map((thread, i) => {
-            return <ThreadListItem key={thread.id} thread={thread} />;
+            return <ThreadListItem key={thread.id} thread={thread} userName={this.props.userName} />;
           })}
         </ul>
       </div>
@@ -19,5 +19,6 @@ export default class ThreadList extends PureComponent {
 }
 
 ThreadList.propTypes = {
-  threads: React.PropTypes.instanceOf(immutable.List)
+  threads: React.PropTypes.instanceOf(immutable.List),
+  userName: React.PropTypes.string
 };

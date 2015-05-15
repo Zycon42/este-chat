@@ -8,16 +8,20 @@ export default class ThreadListItem extends PureComponent {
   render() {
     const thread = this.props.thread;
     const lastMessage = thread.lastMessage;
-
     return (
       <li className="thread-list-item">
         <Link params={{threadId: thread.id}} to="thread">
-          <h5 className="thread-name">{thread.name}</h5>
-          <div className="thread-time">
-            {lastMessage.date.toLocaleTimeString()}
-          </div>
-          <div className="thread-last-message">
-            {lastMessage.text}
+          <img className="avatar" height="40" src={thread.avatarUrl} />
+          <div className="thread-info">
+            <header>
+              <div className="thread-name">{thread.name}</div>
+              <div className="thread-time">
+                {lastMessage.date.toLocaleTimeString()}
+              </div>
+            </header>
+            <div className="thread-last-message">
+              {lastMessage.authorName === this.props.userName ? 'You:' : ''} {lastMessage.text}
+            </div>
           </div>
         </Link>
       </li>
@@ -26,5 +30,6 @@ export default class ThreadListItem extends PureComponent {
 }
 
 ThreadListItem.propTypes = {
-  thread: React.PropTypes.instanceOf(Thread)
+  thread: React.PropTypes.instanceOf(Thread),
+  userName: React.PropTypes.string
 };

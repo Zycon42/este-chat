@@ -16,14 +16,16 @@ class ChatThread extends React.Component {
     const thread = getThread(threadId);
     const messages = getMessaggesForThread(threadId);
     return (
-      <div className="col-xs-12">
-        <h3>{thread.name}</h3>
-        <ul className="message-list" ref="messageList">
-          {messages.map(message => {
-            return <MessageListItem key={message.id} message={message}/>;
-          })}
-        </ul>
-        <MessageComposer />
+      <div className="message-section row">
+        <div className="col-xs-12">
+          <h3 className="thread-name">{thread.name}</h3>
+          <ul className="message-list" ref="messageList">
+            {messages.map(message => {
+              return <MessageListItem key={message.id} message={message}/>;
+            })}
+          </ul>
+          <MessageComposer />
+        </div>
       </div>
     );
   }

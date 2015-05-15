@@ -13,6 +13,7 @@ export const state = new State(initialState, function(key, value) {
       return new Thread({
         id: thread.get('id'),
         name: thread.get('name'),
+        avatarUrl: thread.get('avatarUrl'),
         lastMessage: new Message({
           id: thread.getIn(['lastMessage', 'id']),
           authorName: thread.getIn(['lastMessage', 'authorName']),

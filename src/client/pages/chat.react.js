@@ -1,14 +1,14 @@
+import AppBarTitle from '../chat/appbartitle.react';
 import DocumentTitle from 'react-document-title';
+import Logout from '../auth/logout.react';
+import NavigationHeader from '../chat/navigationheader.react';
 import React from 'react';
-import {RouteHandler} from 'react-router';
-import {AppCanvas, AppBar, LeftNav, Paper} from 'material-ui';
 import requireAuth from '../auth/requireauth.react';
 import ThreadList from '../chat/threadlist.react';
-import AppBarTitle from '../chat/appbartitle.react';
-import NavigationHeader from '../chat/navigationheader.react';
-import Logout from '../auth/logout.react';
-import {getUser} from '../user/store';
+import {AppCanvas, AppBar, LeftNav} from 'material-ui';
 import {getThreadsChrono} from '../chat/store';
+import {getUser} from '../user/store';
+import {RouteHandler} from 'react-router';
 import {state} from '../state';
 
 // Leverage webpack require goodness for feature toggle based dead code removal.
@@ -72,14 +72,12 @@ class Chat extends React.Component {
           <div className="page-container-fluid">
             <div className="row">
               <div className="col-xs-12 col-md-4">
-                <Paper className="flex-paper" innerClassName="row" rounded={false}>
-                  <ThreadList threads={threads}/>
-                </Paper>
+                <div className="thread-section row">
+                  <ThreadList threads={threads} userName={user.name} />
+                </div>
               </div>
               <div className="col-xs-12 col-md-8">
-                <Paper className="flex-paper" innerClassName="row" rounded={false}>
-                  <RouteHandler />
-                </Paper>
+                <RouteHandler />
               </div>
             </div>
           </div>

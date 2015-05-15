@@ -12,6 +12,7 @@ export const Message = Record({
 export const Thread = Record({
   id: '',
   name: '',
+  avatarUrl: '',
   lastMessage: new Message()
 });
 

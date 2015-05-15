@@ -1,12 +1,12 @@
 import React from 'react';
-import {Paper, TextField, FontIcon, FlatButton} from 'material-ui';
+import {TextField, FontIcon, FlatButton} from 'material-ui';
 import PureComponent from '../components/purecomponent.react';
 
 export default class MessageComposer extends PureComponent {
 
   render() {
     return (
-      <Paper className="message-composer" rounded={false}>
+      <div className="message-composer">
         <FlatButton className="send-btn" title="send">
           <FontIcon className="mdi mdi-send" />
         </FlatButton>
@@ -17,7 +17,7 @@ export default class MessageComposer extends PureComponent {
             multiLine={true}
           />
         </div>
-      </Paper>
+      </div>
     );
   }
 }
