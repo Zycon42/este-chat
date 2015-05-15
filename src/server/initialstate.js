@@ -4,7 +4,6 @@ import messages from '../client/messages';
 const initialLocale = 'en';
 
 export default {
-  $pendingActions: {},
   auth: {
     forms: {
       login: {
@@ -41,6 +40,7 @@ export default {
       id: 7, authorName: 'Brian', text: 'At ForwardJS?  Yeah, of course.  See you there!', date: Date.now() - 39999
     }}
   },
+  pendingActions: {},
   messages: {
     1: [
       {id: 1, authorName: 'Bill', text: 'Hey Jing, want to give a Flux talk at ForwardJS?', date: Date.now() - 99999},
