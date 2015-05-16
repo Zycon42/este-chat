@@ -19,13 +19,16 @@ body {
 }
 
 .app-bar {
-  position: absolute;
   height: 64px;
   z-index: 0;
 
-  @media only screen and (min-width: 30em) {
-    &.icon-hidden-xs .mui-app-bar-navigation-icon-button {
-      visibility: hidden;
+  &.icon-visible-xs .mui-app-bar-navigation-icon-button {
+    visibility: hidden;
+  }
+
+  @media only screen and (max-width: 48em) {
+    &.icon-visible-xs .mui-app-bar-navigation-icon-button {
+      visibility: visible;
     }
   }
 
@@ -54,6 +57,7 @@ body {
 
 .app-bar-extended {
   height: 128px;
+  position: absolute;
 }
 
 .left-nav {
@@ -91,21 +95,6 @@ body {
   }
 }
 
-.page-container, .page-container-fluid {
-  padding-top: 64px;
-}
-
-.page-container-fluid {
-  >.row {
-    margin: 0;
-    height: 100%;
-
-    >div {
-      padding: 0;
-    }
-  }
-}
-
 .chat-title {
   .avatar {
     float: left;
@@ -132,6 +121,7 @@ body {
 .form-container {
   z-index: 1;
   background-color: #fff;
+  margin-top: 64px;
 
   img {
     display: block;
@@ -186,8 +176,8 @@ body {
   float: right !important;
 }
 
-.hidden-sm {
-  @media (max-width: 30em) {
+.hidden-xs {
+  @media (max-width: 48em) {
     display: none !important;
   }
 }

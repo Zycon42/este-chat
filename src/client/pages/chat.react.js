@@ -1,5 +1,6 @@
 import AppBarTitle from '../chat/appbartitle.react';
 import DocumentTitle from 'react-document-title';
+import exposeRouter from '../components/exposerouter.react';
 import Logout from '../auth/logout.react';
 import NavigationHeader from '../chat/navigationheader.react';
 import React from 'react';
@@ -54,32 +55,33 @@ class Chat extends React.Component {
     ];
 
     const user = getUser();
+
+    let threadsClasses = 'col-xs-12 col-sm-5 col-md-4';
+    // when viewing thread messages hide threads list on mobile
+    if (!this.props.router.isActive('home'))
+      threadsClasses += ' hidden-xs';
     return (
       <DocumentTitle title="Este.js - Chat">
         <AppCanvas>
-          <AppBar
-            className="app-bar"
-            onMenuIconButtonTouchTap={() => this.refs.leftNav.toggle() }
-            title={<AppBarTitle user={user} />}
-            zDepth={0}
-          />
+          <div className="chat-container row">
+            <div className={threadsClasses}>
+              <AppBar
+                className="app-bar"
+                onMenuIconButtonTouchTap={() => this.refs.leftNav.toggle() }
+                title={<AppBarTitle user={user} />}
+                zDepth={0}
+              />
 
-          <LeftNav className="left-nav" docked={false}
-            header={<NavigationHeader user={user} />}
-            menuItems={menuItems} ref="leftNav"
-          />
+              <LeftNav className="left-nav" docked={false}
+                header={<NavigationHeader user={user} />}
+                menuItems={menuItems} ref="leftNav"
+              />
 
-          <div className="page-container-fluid">
-            <div className="row">
-              <div className="col-xs-12 col-md-4">
-                <div className="thread-section row">
-                  <ThreadList threads={threads} userName={user.name} />
-                </div>
-              </div>
-              <div className="col-xs-12 col-md-8">
-                <RouteHandler />
+              <div className="thread-section row">
+                <ThreadList threads={threads} userName={user.name} />
               </div>
             </div>
+            <RouteHandler />
           </div>
         </AppCanvas>
       </DocumentTitle>
@@ -87,4 +89,8 @@ class Chat extends React.Component {
   }
 }
 
-export default requireAuth(Chat);
+Chat.propTypes = {
+  router: React.PropTypes.func
+};
+
+export default requireAuth(exposeRouter(Chat));
