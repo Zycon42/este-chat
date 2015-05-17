@@ -1,6 +1,6 @@
 import State from '../lib/state';
 import Immutable from 'immutable';
-import {Thread, Message} from './chat/store';
+import {reviveThreads, reviveMessages} from './chat/store';
 import {loadDataFromJS} from './user/store';
 
 const initialState = process.env.IS_BROWSER
@@ -9,31 +9,10 @@ const initialState = process.env.IS_BROWSER
 
 export const state = new State(initialState, function(key, value) {
   if (key === 'threads')
-    return value.map(thread => {
-      return new Thread({
-        id: thread.get('id'),
-        name: thread.get('name'),
-        avatarUrl: thread.get('avatarUrl'),
-        lastMessage: new Message({
-          id: thread.getIn(['lastMessage', 'id']),
-          authorName: thread.getIn(['lastMessage', 'authorName']),
-          text: thread.getIn(['lastMessage', 'text']),
-          date: new Date(thread.getIn(['lastMessage', 'date']))
-        })
-      });
-    }).toMap();
+    return reviveThreads(value);
 
   if (this === initialState && key === 'messages')
-    return value.map(messages => {
-      return messages.map(message => {
-        return new Message({
-          id: message.get('id'),
-          authorName: message.get('authorName'),
-          text: message.get('text'),
-          date: new Date(message.get('date'))
-        });
-      }).toList();
-    }).toMap();
+    return reviveMessages(value);
 
   if (key === 'authData')
     return loadDataFromJS(value.toJS());

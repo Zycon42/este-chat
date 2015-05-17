@@ -8,6 +8,7 @@ export default class ThreadListItem extends PureComponent {
   render() {
     const thread = this.props.thread;
     const lastMessage = thread.lastMessage;
+    console.log(lastMessage);
     return (
       <li className="thread-list-item">
         <Link params={{threadId: thread.id}} to="thread">
@@ -20,7 +21,7 @@ export default class ThreadListItem extends PureComponent {
               </div>
             </header>
             <div className="thread-last-message">
-              {lastMessage.authorName === this.props.userName ? 'You:' : ''} {lastMessage.text}
+              {lastMessage.author.name === this.props.userName ? 'You:' : ''} {lastMessage.text}
             </div>
           </div>
         </Link>

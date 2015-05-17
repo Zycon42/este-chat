@@ -1,9 +1,14 @@
 import {Record} from 'immutable';
 import {threadsCursor, messagesCursor} from '../state';
 
+export const Author = Record({
+  name: '',
+  avatarUrl: ''
+});
+
 export const Message = Record({
   id: '',
-  authorName: '',
+  author: new Author(),
   text: '',
   date: new Date(),
   isRead: false
@@ -15,6 +20,32 @@ export const Thread = Record({
   avatarUrl: '',
   lastMessage: new Message()
 });
+
+function reviveMessage(message) {
+  return new Message({
+    id: message.get('id'),
+    author: new Author(message.get('author').toJS()),
+    text: message.get('text'),
+    date: new Date(message.get('date'))
+  });
+}
+
+export function reviveThreads(threads) {
+  return threads.map(thread => {
+    return new Thread({
+      id: thread.get('id'),
+      name: thread.get('name'),
+      avatarUrl: thread.get('avatarUrl'),
+      lastMessage: reviveMessage(thread.get('lastMessage'))
+    });
+  }).toMap();
+}
+
+export function reviveMessages(value) {
+  return value.map(messages => {
+    return messages.map(message => reviveMessage(message)).toList();
+  }).toMap();
+}
 
 export function getThreads() {
   return threadsCursor();
